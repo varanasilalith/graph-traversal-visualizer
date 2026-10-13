@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Graph Traversal Visualizer</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">
+            <span class="logo-icon">◈</span>
+            Graph Traversal Visualizer
+        </div>
+
+        <p class="header-subtitle">
+            Explore graph algorithms interactively
+        </p>
+    </header>
+    <!-- MAIN CONTENT -->
+    <main class="container">
+
+        <!-- GRAPH INPUT SECTION -->
+        <section class="panel input-panel">
+
+            <div class="section-heading">
+                <span class="section-number">01</span>
+                <div>
+                    <h2>Create Your Graph</h2>
+                    <p>Enter nodes and connections to build your graph.</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="nodesInput">Nodes</label>
+
+                <input
+                    type="text"
+                    id="nodesInput"
+                    placeholder="Example: A, B, C, D, E, F"
+                    value="A, B, C, D, E, F, G, H"
+                >
+
+                <small>Separate node names using commas.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="edgesInput">Edges (Connections)</label>
+
+                <input
+                    type="text"
+                    id="edgesInput"
+                    placeholder="Example: A-B, A-C, B-D, B-E, C-F"
+                    value="A-B, A-C, B-D, B-E, C-F, C-G, D-H"
+                >
+
+                <small>Use A-B to connect node A with node B.</small>
+            </div>
+
+            <button type="button" id="createGraphBtn" class="primary-btn">
+                Create Graph
+            </button>
+
+            <p id="inputMessage" class="message" aria-live="polite"></p>
+
+        </section>
+<!-- GRAPH + TRAVERSAL CONTROLS LAYOUT -->
+        <section class="workspace">
+        
+            <!-- LEFT SIDE: TRAVERSAL CONTROLS -->
+            <section class="panel controls-panel">
+        
+                <div class="section-heading">
+                    <span class="section-number">03</span>
+                    <div>
+                        <h2>Traversal Controls</h2>
+                        <p>Control the animation here.</p>
+                    </div>
+                </div>
+        
+                <div class="form-group">
+                    <label for="algorithm">Algorithm</label>
+        
+                    <select id="algorithm">
+                        <option value="bfs">BFS — Breadth-First Search</option>
+                        <option value="dfs">DFS — Depth-First Search</option>
+                    </select>
+                </div>
+        
+                <div class="form-group">
+                    <label for="startNode">Starting Node</label>
+        
+                    <select id="startNode">
+                        <option value="A">A</option>
+                    </select>
+                </div>
+        
+                <div class="control-buttons">
+                    <button type="button" id="startBtn" class="primary-btn">
+                        ▶ Start
+                    </button>
+        
+                    <button type="button" id="pauseBtn" class="secondary-btn">
+                        ⏸ Pause
+                    </button>
+        
+                    <button type="button" id="nextStepBtn" class="secondary-btn">
+                        ⏭ Next Step
+                    </button>
+        
+                    <button type="button" id="resetBtn" class="secondary-btn">
+                        ↻ Reset
+                    </button>
+                </div>
+        
+                <div class="traversal-status">
+                    <span class="status-label">Status</span>
+                    <p id="status" aria-live="polite">
+                        Ready to start traversal.
+                    </p>
+                </div>
+        
+            </section>
+            <!-- RIGHT SIDE: GRAPH -->
+            <section class="panel graph-panel">
+        
+                <div class="section-heading">
+                    <span class="section-number">02</span>
+                    <div>
+                        <h2>Graph Visualization</h2>
+                        <p>Watch BFS or DFS in action.</p>
+                    </div>
+                </div>
+        
+                <div class="graph-toolbar">
+                    <div class="layout-info">
+                        <span class="status-dot"></span>
+                        BFS Layer Layout
+                    </div>
+        
+                    <span class="graph-hint">
+                        Undirected graph
+                    </span>
+                </div>
+        
+                <div
+                    id="graph"
+                    class="graph-container"
+                    role="img"
+                    aria-label="Interactive graph visualization">
+                    <p class="graph-placeholder">
+                        Your graph will appear here.
+                    </p>
+                </div>
+                <div class="legend">
+                    <div class="legend-item">
+                        <span class="legend-node"></span>
+                        Unvisited
+                    </div>
+        
+                    <div class="legend-item">
+                        <span class="legend-node visited"></span>
+                        Visited
+                    </div>
+        
+                    <div class="legend-item">
+                        <span class="legend-node current"></span>
+                        Current
+                    </div>
+                </div>
+        
+            </section>
+        
+        </section>
+<!-- TRAVERSAL RESULTS -->
+<section class="panel results-panel">
+
+    <div class="section-heading">
+        <span class="section-number">04</span>
+        <div>
+            <h2>Traversal Results</h2>
+            <p>See the order in which nodes are visited.</p>
+        </div>
+    </div>
+
+    <div class="result-content">
+        <h3>Traversal Order</h3>
+
+        <div id="traversalOrder" class="traversal-order" aria-live="polite" >
+            <span class="empty-result">
+                No nodes visited yet.
+            </span>
+        </div>
+    </div>
+</section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
